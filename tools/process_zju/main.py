@@ -113,7 +113,8 @@ def cli(subject_id: int):
         "joints": joints,  # [1470, 24, 3]
         "tfs": tfs,  # [1470, 24, 4, 4]
         "tf_bones": tf_bones,  # [1470, 24, 4, 4]
-        "params": params  # [1470, 72 + 3 + 3]
+        "params": params,  # [1470, 72 + 3 + 3]
+        "faces": body_model.faces_tensor,  # [13776, 3]
     }
     save_path = os.path.join(
         PROJECT_DIR, "data", "zju", "CoreView_%d" % subject_id, "pose_data.pt"
