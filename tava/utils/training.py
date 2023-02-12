@@ -28,7 +28,7 @@ def save_ckpt(path, step, model, optimizer):
 
 def clean_up_ckpt(path, n_keep=5):
     """Clean up the checkpoints to keep only the last few (also keep the best one)."""
-    if os.path.exists(path):
+    if not os.path.exists(path):
         return
     ckpt_paths = sorted(
         [os.path.join(path, fp) for fp in os.listdir(path) if ".ckpt" in fp]

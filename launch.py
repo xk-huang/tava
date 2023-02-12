@@ -52,7 +52,7 @@ def _distributed_worker(
 ) -> float:
     configure_log(hydra_config.job_logging, hydra_config.verbose)
     LOGGER.info("Distributed worker: %d / %d" % (local_rank + 1, world_size))
-    if cfg.percision == "float64":
+    if cfg.precision == "float64":
         torch.set_default_tensor_type(torch.DoubleTensor)
         torch.set_default_dtype(torch.float64)
     if cfg.distributed:
@@ -72,7 +72,7 @@ def _distributed_worker(
 
 def _run(cfg: DictConfig, hydra_config: DictConfig) -> float:
     assert torch.cuda.is_available(), "CUDA device is required!"
-    assert cfg.percision in ["float32", "float64"]
+    assert cfg.precision in ["float32", "float64"]
     world_size = torch.cuda.device_count()
     if world_size == 1:
         cfg.distributed = False

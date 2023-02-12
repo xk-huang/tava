@@ -84,7 +84,7 @@ def vertices2joints(J_regressor, vertices):
     return torch.einsum('jv,bvk->bjk', J_regressor, vertices)
 
 
-def to_se4(R, t):
+def to_se3(R, t):
     """ Convert R and t to 4 x 4 transformation matrices
     
     Args:
@@ -125,7 +125,7 @@ def batch_rigid_transform(rot_mats, joints, parents):
     # Note(ruilongli): `transforms_mat` seems to be problematic.
     # Shouldn't it be `[R, 0] @ [I, T] = [R, RT]`, instead of `[I, T] @ [R, 0] = [R, T]`?
     # In the case of `[R, T]`, posed_joints[:, 0:4] always equal to joints[:, 0:4].
-    transforms_mat = to_se4(
+    transforms_mat = to_se3(
         rot_mats.view(-1, 3, 3),
         rel_joints.contiguous().view(-1, 3, 1)
     ).view(-1, joints.shape[1], 4, 4)

@@ -12,7 +12,7 @@ lr_delay_mult: 0.01
 max_steps: 300_000
 weight_decay_mult: 0.0
 
-percision: float32
+precision: float32
 print_every: 100
 save_every: 1000
 test_chunk: 512
